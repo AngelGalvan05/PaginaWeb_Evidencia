@@ -76,10 +76,13 @@
         </main>
     </div>
     <script type="module">
+        // Filtros
+
+
         import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
         import { getFirestore, collection, getDocs, addDoc } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
 
-        // 1. REEMPLAZA ESTO CON TUS LLAVES (Las que copiaste de la consola de Firebase)
+        // Datos de la Base de Datos
         const firebaseConfig = {
             apiKey: "AIzaSyCvxilsuHcDCynIDoaAbNBCvoY47OCuv0g",
             authDomain: "paginawebuanlevidencia.firebaseapp.com",
@@ -121,6 +124,35 @@
                 console.error("Error al cargar:", error);
             }
         }
+        // ====================================================================
+        // LÓGICA PARA LOS FILTROS DE CATEGORÍA (HU02)
+        // ====================================================================
+        
+        // 1. Seleccionamos todos los "radio buttons" de la barra lateral
+        const botonesFiltro = document.querySelectorAll('input[name="categoria"]');
+
+        // 2. Le agregamos un evento a cada botón
+        botonesFiltro.forEach(boton => {
+            boton.addEventListener('change', (evento) => {
+                // Obtenemos el valor del filtro seleccionado (ej: "hardware", "todos")
+                const categoriaSeleccionada = evento.target.value; 
+                
+                // Buscamos todas las tarjetas de producto que están actualmente en pantalla
+                const tarjetas = document.querySelectorAll('.product-card');
+
+                // Recorremos cada tarjeta para decidir su visibilidad
+                tarjetas.forEach(tarjeta => {
+                    const categoriaTarjeta = tarjeta.dataset.categoria;
+
+                    // Si elegimos "todos" o la categoría coincide, la mostramos. Si no, la ocultamos.
+                    if (categoriaSeleccionada === 'todos' || categoriaTarjeta === categoriaSeleccionada) {
+                        tarjeta.style.display = 'block'; 
+                    } else {
+                        tarjeta.style.display = 'none'; 
+                    }
+                });
+            });
+        });
 
         // Cargamos los productos apenas se abre la página
         cargarProductos();
