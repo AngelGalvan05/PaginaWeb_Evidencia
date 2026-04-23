@@ -23,6 +23,14 @@ body {
     z-index: 100;
 }
 
+.auth-container {
+    display: none; /* 🔥 ESTO ES LA CLAVE */
+}
+
+.auth-container.active {
+    display: block;
+}
+
 .logo {
     font-size: 24px;
     font-weight: bold;
