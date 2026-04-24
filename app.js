@@ -55,7 +55,7 @@ function register() {
     createUserWithEmailAndPassword(auth, email, password)
         .then(() => {
             document.getElementById("mensaje").innerText = "Cuenta creada";
-            irALogin(); // 🔥 lo manda a login automáticamente
+            irALogin(); //  lo manda a login automáticamente
         })
         .catch(error => {
             document.getElementById("mensaje").innerText = error.message;
