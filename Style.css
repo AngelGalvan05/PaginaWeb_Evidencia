@@ -295,3 +295,70 @@ body {
     height: 25px;
     cursor: pointer;
 }
+
+/* Alineación en el Header */
+.user-menu {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+.btn-auth {
+    background: transparent;
+    border: 1px solid #2d3277;
+    color: #2d3277;
+    padding: 8px 15px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: bold;
+    margin-left: 5px;
+}
+
+.btn-auth:hover {
+    background: #2d3277;
+    color: white;
+}
+
+/* Modal / Ventana desplegable */
+.auth-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.7); /* Fondo oscurecido */
+    display: none; 
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+
+.auth-box {
+    background: white;
+    padding: 40px;
+    border-radius: 12px;
+    width: 90%;
+    max-width: 400px;
+    position: relative;
+    box-shadow: 0 15px 30px rgba(0,0,0,0.4);
+}
+
+.form-box h3 {
+    margin-bottom: 5px;
+    color: #333;
+}
+
+.form-box p {
+    font-size: 14px;
+    color: #666;
+    margin-bottom: 20px;
+}
+
+/* Inputs requeridos */
+.form-box input {
+    width: 100%;
+    padding: 12px;
+    margin-bottom: 12px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+}

@@ -12,57 +12,45 @@
     <div class="logo">TechMarket</div>
 
     <div class="search-bar">
-        <input type="text" placeholder="Buscar componentes, licencias y más...">
+        <input type="text" placeholder="Buscar componentes...">
         <button>Buscar</button>
     </div>
 
-    <!-- 🔥 AQUI VAN LOS BOTONES -->
-    <div class="auth-buttons">
-        <button onclick="mostrarLogin()">Iniciar sesión</button>
-        <button onclick="mostrarRegistro()">Registrarse</button>
+    <div class="user-menu">
+        <div class="auth-buttons">
+            <button class="btn-auth" onclick="mostrarLogin()">Iniciar sesión</button>
+            <button class="btn-auth" onclick="mostrarRegistro()">Registrarse</button>
+        </div>
+        <div class="cart">🛒 (0)</div>
     </div>
-
-    <div class="cart">🛒 Carrito (0)</div>
 </header>
 
 <div class="auth-container" id="authContainer">
-
     <div class="auth-box">
-
-        <!-- LOGIN -->
+        <button class="cerrar" onclick="cerrarForm()">×</button>
+        
         <div id="loginForm" class="form-box active">
-            <h3>Iniciar Sesión</h3>
-
-            <input type="email" id="emailLogin" placeholder="Correo">
-            <input type="password" id="passwordLogin" placeholder="Contraseña">
-
+            <h3>Bienvenido</h3>
+            <p>Ingresa tus credenciales</p>
+            <input type="email" id="emailLogin" placeholder="Correo electrónico" required>
+            <input type="password" id="passwordLogin" placeholder="Contraseña" required>
             <button onclick="login()">Entrar</button>
-
-            <p class="switch">
-                ¿No tienes cuenta? 
-                <span onclick="irARegistro()">Crear cuenta</span>
-            </p>
+            <p class="switch">¿No tienes cuenta? <span onclick="irARegistro()">Crear cuenta</span></p>
         </div>
 
-        <!-- REGISTRO -->
         <div id="registerForm" class="form-box">
-            <h3>Crear Cuenta</h3>
-
-            <input type="email" id="emailRegister" placeholder="Correo">
-            <input type="password" id="passwordRegister" placeholder="Contraseña">
-
-            <button onclick="register()">Registrarse</button>
-
-            <p class="switch">
-                ¿Ya tienes cuenta? 
-                <span onclick="irALogin()">Iniciar sesión</span>
-            </p>
+            <h3>Registro de Usuario</h3>
+            <p>Completa tu perfil personal</p>
+            <input type="text" id="nombreRegister" placeholder="Nombre completo" required>
+            <input type="tel" id="telRegister" placeholder="Teléfono" required>
+            <input type="email" id="emailRegister" placeholder="Correo electrónico" required>
+            <input type="password" id="passwordRegister" placeholder="Contraseña (mín. 6 caracteres)" required>
+            
+            <button onclick="register()">Finalizar Registro</button>
+            <p class="switch">¿Ya tienes cuenta? <span onclick="irALogin()">Iniciar sesión</span></p>
         </div>
-
-        <button class="cerrar" onclick="cerrarForm()">X</button>
 
         <p id="mensaje"></p>
-
     </div>
 </div>
 
@@ -114,3 +102,5 @@
     </div>
 </body>
 </html>
+
+<script type="module" src="app.js"></script>
