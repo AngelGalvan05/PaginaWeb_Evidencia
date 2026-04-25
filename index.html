@@ -157,7 +157,35 @@
         // Cargamos los productos apenas se abre la página
         cargarProductos();
 
-        // Funciones temporales para que no marque error el HTML de tu compañero
+        // ====================================================================
+        // LÓGICA PARA LA BARRA DE BÚSQUEDA
+        // ====================================================================
+        
+        // 1. Seleccionamos el campo de texto (input) que está dentro de la clase .search-bar
+        const inputBusqueda = document.querySelector('.search-bar input');
+
+        // 2. Usamos el evento 'input' para que busque en tiempo real cada vez que tecleas una letra
+        inputBusqueda.addEventListener('input', (evento) => {
+            // Obtenemos lo que el usuario escribió y lo pasamos a minúsculas
+            const textoBuscado = evento.target.value.toLowerCase();
+            
+            // Seleccionamos todas las tarjetas del catálogo
+            const tarjetas = document.querySelectorAll('.product-card');
+
+            // Revisamos cada tarjeta una por una
+            tarjetas.forEach(tarjeta => {
+                // Extraemos el texto del título del producto (lo que está en la etiqueta h4)
+                const tituloProducto = tarjeta.querySelector('.product-title').textContent.toLowerCase();
+
+                // Si el título incluye el texto que escribimos, la mostramos. Si no, la ocultamos.
+                if (tituloProducto.includes(textoBuscado)) {
+                    tarjeta.style.display = 'block';
+                } else {
+                    tarjeta.style.display = 'none';
+                }
+            });
+        });
+        // Funciones temporales para que no marque error el HTML del mushahso Azael
         window.login = function() { console.log("Login pendiente por otro dev"); };
         window.register = function() { console.log("Registro pendiente"); };
     </script>
