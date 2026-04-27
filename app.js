@@ -13,8 +13,8 @@ window.mostrarLogin = function() {
     const mensaje = document.getElementById("mensaje");
 
     container.style.display = "flex";
-    loginForm.classList.add("active");
-    registerForm.classList.remove("active");
+    loginForm.style.display = "block";
+    registerForm.style.display = "none";
     mensaje.innerText = ""; // Limpia mensajes previos
 }
 
@@ -26,8 +26,8 @@ window.mostrarRegistro = function() {
     const mensaje = document.getElementById("mensaje");
 
     container.style.display = "flex";
-    registerForm.classList.add("active");
-    loginForm.classList.remove("active");
+    registerForm.style.display = "block";
+    loginForm.style.display = "none";
     mensaje.innerText = "";
 }
 
@@ -38,15 +38,15 @@ window.cerrarForm = function() {
 
 // Cambia la vista interna de Login a Registro
 window.irARegistro = function() {
-    document.getElementById("loginForm").classList.remove("active");
-    document.getElementById("registerForm").classList.add("active");
+    document.getElementById("loginForm").style.display = "none";
+    document.getElementById("registerForm").style.display = "block";
     document.getElementById("mensaje").innerText = "";
 }
 
 // Cambia la vista interna de Registro a Login
 window.irALogin = function() {
-    document.getElementById("registerForm").classList.remove("active");
-    document.getElementById("loginForm").classList.add("active");
+    document.getElementById("registerForm").style.display = "none";
+    document.getElementById("loginForm").style.display = "block";
     document.getElementById("mensaje").innerText = "";
 }
 
@@ -88,10 +88,17 @@ window.register = function() {
     mensaje.innerText = "¡Cuenta creada con éxito! Redirigiendo...";
     mensaje.style.color = "#28a745";
 
-    // Limpiar campos y cerrar después de un delay
+    // Limpiar campos y cambiar al login después de un delay
     setTimeout(() => {
         irALogin();
         mensaje.innerText = "";
+        
+        // Opcional: Limpiar los inputs del formulario de registro
+        document.getElementById("nombreRegister").value = "";
+        document.getElementById("emailRegister").value = "";
+        document.getElementById("telRegister").value = "";
+        document.getElementById("passwordRegister").value = "";
+        document.getElementById("passwordConfirm").value = "";
     }, 2000);
 }
 
@@ -117,5 +124,9 @@ window.login = function() {
         cerrarForm();
         alert("Bienvenido a TechMarket");
         mensaje.innerText = "";
+        
+        // Opcional: Limpiar los inputs
+        document.getElementById("emailLogin").value = "";
+        document.getElementById("passwordLogin").value = "";
     }, 1500);
 }

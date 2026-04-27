@@ -8,79 +8,185 @@
 </head>
 <body>
 
-<header class="header">
-    <div class="logo">TechMarket</div>
+    <header class="header">
+        <div class="logo">TechMarket</div>
 
-    <div class="search-bar">
-        <input type="text" placeholder="Buscar componentes...">
-        <button>Buscar</button>
-    </div>
-
-    <div class="user-menu">
-        <div class="auth-buttons">
-            <button class="btn-auth" onclick="mostrarLogin()">Iniciar sesión</button>
-            <button class="btn-auth" onclick="mostrarRegistro()">Registrarse</button>
+        <div class="search-bar">
+            <input type="text" placeholder="Buscar componentes, licencias y más...">
+            <button>Buscar</button>
         </div>
-        <div class="cart">🛒 (0)</div>
-    </div>
-</header>
 
-<div class="auth-container" id="authContainer" style="display: none;">
-    <div class="auth-box">
-        <button class="cerrar" onclick="cerrarForm()">×</button>
+        <div class="user-menu">
+            <div class="auth-buttons">
+                <button class="btn-auth" onclick="mostrarLogin()">Iniciar sesión</button>
+                <button class="btn-auth" onclick="mostrarRegistro()">Registrarse</button>
+            </div>
+            <div class="cart">🛒 (0)</div>
+        </div>
+    </header>
+
+    <div class="auth-container" id="authContainer">
+        <div class="auth-box">
+            <button class="cerrar" onclick="cerrarForm()">×</button>
+            
+            <div id="loginForm" class="form-box active">
+                <h3>Iniciar sesión</h3>
+                <div class="input-group">
+                    <label for="emailLogin">Correo electrónico</label>
+                    <input type="email" id="emailLogin" required>
+                </div>
+                <div class="input-group">
+                    <label for="passwordLogin">Contraseña</label>
+                    <input type="password" id="passwordLogin" required>
+                </div>
+                <button class="btn-primary" onclick="login()">Continuar</button>
+                <p class="switch">¿Eres nuevo en TechMarket? <span onclick="irARegistro()">Crea tu cuenta</span></p>
+            </div>
+
+            <div id="registerForm" class="form-box">
+                <h3>Crear cuenta</h3>
+                
+                <div class="input-group">
+                    <label for="nombreRegister">Tu nombre</label>
+                    <input type="text" id="nombreRegister" placeholder="Nombre y apellido" required>
+                </div>
+
+                <div class="input-group">
+                    <label for="telRegister">Número de celular (opcional)</label>
+                    <input type="tel" id="telRegister">
+                </div>
+
+                <div class="input-group">
+                    <label for="emailRegister">Correo electrónico</label>
+                    <input type="email" id="emailRegister" required>
+                </div>
+
+                <div class="input-group">
+                    <label for="passwordRegister">Contraseña</label>
+                    <input type="password" id="passwordRegister" placeholder="Al menos 6 caracteres" required>
+                </div>
+
+                <div class="input-group">
+                    <label for="passwordConfirm">Vuelve a escribir la contraseña</label>
+                    <input type="password" id="passwordConfirm" required>
+                </div>
+                
+                <button class="btn-primary" onclick="register()">Crear tu cuenta</button>
+                <p class="switch">¿Ya tienes una cuenta? <span onclick="irALogin()">Inicia sesión</span></p>
+            </div>
+
+            <p id="mensaje"></p>
+        </div>
+    </div>
+
+    <div class="main-container">
         
-        <div id="loginForm" class="form-box active">
-            <h3>Iniciar sesión</h3>
-            <div class="input-group">
-                <label for="emailLogin">Correo electrónico</label>
-                <input type="email" id="emailLogin" required>
-            </div>
-            <div class="input-group">
-                <label for="passwordLogin">Contraseña</label>
-                <input type="password" id="passwordLogin" required>
-            </div>
-            <button class="btn-primary" onclick="login()">Continuar</button>
-            <p class="switch">¿Eres nuevo en TechMarket? <span onclick="irARegistro()">Crea tu cuenta</span></p>
-        </div>
+        <aside class="sidebar">
+            <h3>Categorías</h3>
+            <ul class="filter-list">
+                <li><label><input type="radio" name="categoria" value="todos" checked> Todos</label></li>
+                <li><label><input type="radio" name="categoria" value="hardware"> Hardware</label></li>
+                <li><label><input type="radio" name="categoria" value="electrónica"> Electrónica</label></li>
+                <li><label><input type="radio" name="categoria" value="servicios"> Servicios</label></li>
+            </ul>
+        </aside>
 
-        <div id="registerForm" class="form-box">
-            <h3>Crear cuenta</h3>
-            
-            <div class="input-group">
-                <label for="nombreRegister">Tu nombre</label>
-                <input type="text" id="nombreRegister" placeholder="Nombre y apellido" required>
-            </div>
-
-            <div class="input-group">
-                <label for="telRegister">Número de celular (opcional)</label>
-                <input type="tel" id="telRegister">
-            </div>
-
-            <div class="input-group">
-                <label for="emailRegister">Correo electrónico</label>
-                <input type="email" id="emailRegister" required>
-            </div>
-
-            <div class="input-group">
-                <label for="passwordRegister">Contraseña</label>
-                <input type="password" id="passwordRegister" placeholder="Al menos 6 caracteres" required>
-            </div>
-
-            <div class="input-group">
-                <label for="passwordConfirm">Vuelve a escribir la contraseña</label>
-                <input type="password" id="passwordConfirm" required>
-            </div>
-            
-            <button class="btn-primary" onclick="register()">Crear tu cuenta</button>
-            <p class="switch">¿Ya tienes una cuenta? <span onclick="irALogin()">Inicia sesión</span></p>
-        </div>
-
-        <p id="mensaje" style="margin-top: 15px; font-weight: bold; min-height: 20px;"></p>
+        <main class="product-grid" id="catalogo">
+            </main>
     </div>
-</div>
 
+    <script src="app.js"></script>
 
-<script src="app.js"></script>
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
+        import { getFirestore, collection, getDocs } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
+
+        // Datos de la Base de Datos
+        const firebaseConfig = {
+            apiKey: "AIzaSyCvxilsuHcDCynIDoaAbNBCvoY47OCuv0g",
+            authDomain: "paginawebuanlevidencia.firebaseapp.com",
+            projectId: "paginawebuanlevidencia",
+            storageBucket: "paginawebuanlevidencia.firebasestorage.app",
+            messagingSenderId: "333532326502",
+            appId: "1:333532326502:web:6e98985eaf107d4cc01ba7"
+        };
+
+        const app = initializeApp(firebaseConfig);
+        const db = getFirestore(app);
+
+        // ====================================================================
+        // CARGA DE PRODUCTOS DESDE FIREBASE
+        // ====================================================================
+        async function cargarProductos() {
+            const contenedorCatalogo = document.getElementById("catalogo");
+            try {
+                const querySnapshot = await getDocs(collection(db, "productos"));
+                contenedorCatalogo.innerHTML = ""; // Limpiamos productos de prueba anteriores
+
+                querySnapshot.forEach((doc) => {
+                    const producto = doc.data();
+                    contenedorCatalogo.innerHTML += `
+                        <div class="product-card" data-categoria="${producto.categoria.toLowerCase()}">
+                            <div class="product-image">
+                                <img src="${producto.imagenUrl}" alt="${producto.nombre}" style="width:100%; height:100%; object-fit:contain; padding:10px;">
+                            </div>
+                            <div class="product-info">
+                                <span class="category-tag">${producto.categoria}</span>
+                                <h4 class="product-title">${producto.nombre}</h4>
+                                <p class="product-price">$${producto.precio}</p>
+                                <button class="btn-details">Ver detalles</button>
+                            </div>
+                        </div>
+                    `;
+                });
+            } catch (error) {
+                console.error("Error al cargar:", error);
+            }
+        }
+
+        // ====================================================================
+        // FILTROS LATERALES
+        // ====================================================================
+        const botonesFiltro = document.querySelectorAll('input[name="categoria"]');
+        botonesFiltro.forEach(boton => {
+            boton.addEventListener('change', (evento) => {
+                const categoriaSeleccionada = evento.target.value; 
+                const tarjetas = document.querySelectorAll('.product-card');
+
+                tarjetas.forEach(tarjeta => {
+                    // Normalizamos para evitar problemas con acentos ("electrónica" vs "electronica")
+                    const categoriaTarjeta = tarjeta.dataset.categoria.normalize("NFD").replace(/[\u0300-\u036f]/g, "");
+                    const catSelecLimpia = categoriaSeleccionada.normalize("NFD").replace(/[\u0300-\u036f]/g, "");
+
+                    if (catSelecLimpia === 'todos' || categoriaTarjeta === catSelecLimpia) {
+                        tarjeta.style.display = 'block'; 
+                    } else {
+                        tarjeta.style.display = 'none'; 
+                    }
+                });
+            });
+        });
+
+        // ====================================================================
+        // BARRA DE BÚSQUEDA
+        // ====================================================================
+        const inputBusqueda = document.querySelector('.search-bar input');
+        inputBusqueda.addEventListener('input', (evento) => {
+            const textoBuscado = evento.target.value.toLowerCase();
+            const tarjetas = document.querySelectorAll('.product-card');
+
+            tarjetas.forEach(tarjeta => {
+                const tituloProducto = tarjeta.querySelector('.product-title').textContent.toLowerCase();
+                if (tituloProducto.includes(textoBuscado)) {
+                    tarjeta.style.display = 'block';
+                } else {
+                    tarjeta.style.display = 'none';
+                }
+            });
+        });
+
+        // Inicializar catálogo al abrir la página
+        cargarProductos();
+    </script>
 </body>
 </html>
-
